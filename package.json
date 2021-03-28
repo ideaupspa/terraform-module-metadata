@@ -1,0 +1,34 @@
+{
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "auto-changelog": "^2.2.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "4.3.0",
+    "lint-staged": "^10.5.4",
+    "standard-version": "^9.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "post-commit": "git update-index --again"
+    }
+  },
+  "name": "terraform-module-metadata",
+  "scripts": {
+    "commit": "git-cz",
+    "release": "standard-version -a && git add --all -v",
+    "push": "git push --follow-tags --set-upstream origin $(git branch | sed -n -e 's/^\\* \\(.*\\)/\\1/p')",
+    "push:force": "git push --follow-tags --set-upstream origin $(git branch | sed -n -e 's/^\\* \\(.*\\)/\\1/p') --force",
+    "env": "source .env.local && cat .env.local && echo \n",
+    "tf:init": "./scripts/automation/terraform_lifecycle.sh --command=init --dir=example",
+    "tf:plan": "./scripts/automation/terraform_lifecycle.sh --command=plan --dir=example",
+    "tf:docs": "./module/docs/generate_docs.sh --dir=module"
+  },
+  "version": "0.0.0"
+}
