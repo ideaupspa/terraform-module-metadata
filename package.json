@@ -30,5 +30,5 @@
     "tf:plan": "./scripts/automation/terraform_lifecycle.sh --command=plan --dir=example",
     "tf:docs": "./module/docs/generate_docs.sh --dir=module"
   },
-  "version": "0.0.0"
+  "version": "0.0.1"
 }
